@@ -43,6 +43,8 @@ mosaicat — 一句话需求 → 13个Agent → 交付设计稿
 12. **Reviewer** — 代码审查
 13. **Validator** — 最终验收，检查所有产出物是否齐全
 
+这个Agent拆分方式不是我凭空想的。设计之前翻了不少开源的多Agent框架找灵感：[LangGraph](https://github.com/langchain-ai/langgraph) 是基于状态机做agent编排的，每个节点就是一个agent，状态在节点之间流转；[CrewAI](https://github.com/crewAIInc/crewAI) 走的是角色扮演路线，给每个agent分配一个"岗位"然后让它们协作；微软的 [AutoGen](https://github.com/microsoft/autogen) 则是用多agent对话的方式来解决问题。我最后没有直接用这些框架（嘴上说的"胶水编程"还没内化），但研究它们怎么拆分agent职责、怎么设计agent之间的数据流，确实帮我想清楚了mosaicat的pipeline该怎么组织。
+
 有了上次的教训，这次我先把每个Agent的职责、输入输出格式、跟前后Agent的对接方式全部用文档写清楚了，确认没问题了再让Claude开始写代码。
 
 ---
@@ -71,6 +73,8 @@ Pipeline设计里是有GitHub集成的：跑完之后自动新建issue、提交P
 
 这种静默失败特别阴。你不仔细检查根本发现不了，因为pipeline自己觉得一切正常。
 
+事后想想，这其实是一个可观测性的问题。Charity Majors在 *Observability Engineering*（O'Reilly, 2022）里区分了两个概念：monitoring是检查你已知的失败模式（比如服务挂了没），observability是从系统的输出来理解那些你事先不知道的问题。我的pipeline有monitoring——它在跑吗？跑完了吗？但完全没有observability——它跑的时候到底在干什么？每一步的实际效果是什么？这跟微服务领域为什么要搞 [OpenTelemetry](https://opentelemetry.io/) 是同一个道理：系统一旦复杂到一定程度，光看"有没有报错"是远远不够的，你需要能从外部观察到系统内部的每一步状态。
+
 ---
 
 ## 3/18 — 问题一个接一个
@@ -94,6 +98,8 @@ Pipeline设计里是有GitHub集成的：跑完之后自动新建issue、提交P
 按理说应该高兴，但前面被坑了太多次，我手动去检查了一下产出物。果然，Validator说"所有artifact已生成"，但实际上有几个关键产物是缺失的——截图没有、API文档只有骨架没有内容、测试报告是空的。
 
 Validator的检查逻辑是"对应的文件路径是否存在"。文件确实存在，只是内容有问题或者为空。它检查的粒度太粗了。
+
+换个角度想，Validator检查"文件存不存在"而不是"内容对不对"，跟产品团队用"功能上线了没有"而不是"用户的问题解决了没有"来衡量进度，本质上是一回事——都是 vanity metrics，虚荣指标。Eric Ries在《精益创业》里反复讲的就是这个：vanity metrics让你感觉良好但不反映真实情况，你需要的是 actionable metrics，能驱动决策的指标。"文件存在"是vanity metric，"文件内容完整且符合规格"才是actionable metric。我的Validator犯了和无数产品团队一样的错误——量了一个让自己安心但毫无意义的东西。
 
 到这天结束，pipeline确实能跑通了——13个Agent按顺序走完，每个阶段都有输出，最后有个绿色的通过标记。但"能跑通"和"跑得对"之间的距离比我想的大得多。
 
@@ -122,7 +128,7 @@ Validator的检查逻辑是"对应的文件路径是否存在"。文件确实存
 
 所以可观测性不是nice-to-have，是必须有的。每个Agent执行完应该有清晰的状态报告——不只是"跑完了"，而是"跑完了，产出了这些东西，这些检查通过了"。出了错也不能吞掉，必须明确报出来。
 
-另一个感受是：多Agent系统的复杂度增长不是线性的。从5个Agent到13个Agent，不是多了8个Agent的工作量，是多了几十条潜在的失败路径。每两个Agent之间的对接都可能出问题，组合起来排列数很恐怖。
+另一个感受是：多Agent系统的复杂度增长不是线性的。从5个Agent到13个Agent，不是多了8个Agent的工作量，是多了几十条潜在的失败路径。每两个Agent之间的对接都可能出问题，组合起来排列数很恐怖。Fred Brooks在1975年的《人月神话》里就算过这笔账：n个节点之间的通信路径是 n(n-1)/2。13个Agent就是78条潜在的失败路径。Brooks当年说的是人和人之间的沟通成本，没想到五十年后用在AI agent之间一样成立。问题的本质没变——复杂度从来不是线性增长的。
 
 不过话说回来，到这天为止，pipeline至少能端到端跑通了。接下来该拿真实需求测测看产出质量到底怎么样了。
 
