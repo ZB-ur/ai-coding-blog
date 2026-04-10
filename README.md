@@ -3,7 +3,7 @@
 > 后端工程师 × Claude Code × 4个项目 × 1600+会话 × 645+ commits
 > 2026.3.13 — 2026.4.10
 
-一个后端研发用一个月时间密集使用 [Claude Code](https://github.com/anthropics/claude-code) 做独立项目，从"推荐我一些好用的工具"到设计控制论Agent编排框架，最后决定转产品。这个系列记录的是认知变化的完整过程——包括后来发现走错了的部分。
+一个后端研发用一个月时间密集使用 [Claude Code](https://github.com/anthropics/claude-code) 做独立项目，从"推荐我一些好用的工具"到设计控制论Agent编排框架。过程中最大的发现是：AI Coding的瓶颈不在代码生成，而在需求定义、功能设计和优先级判断——这些"代码之前"的产品能力，才是真正决定产出质量的地方。这个系列记录的是认知变化的完整过程——包括后来发现走错了的部分。
 
 ---
 
@@ -101,7 +101,6 @@
 | [03-detent-blog8-1.md](03-detent-blog8-1.md) | Detent Phase 1-5、对抗性规划 |
 | [03-detent-blog8-2.md](03-detent-blog8-2.md) | WebUI翻车、控制论重构、NPX打包 |
 | [03-detent-blog8-3.md](03-detent-blog8-3.md) | Detent弃置、Roadmap优先级偏离 |
-| [09-尾声.md](09-尾声.md) | 为什么从研发转产品 |
 
 ---
 
