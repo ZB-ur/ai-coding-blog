@@ -1,4 +1,4 @@
-# AI Coding 一个月复盘
+# AI Coding 反思复盘
 
 > 后端开发 × Claude Code × 4个项目 × 1600+会话 × 645+ commits
 
