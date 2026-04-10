@@ -1,9 +1,9 @@
 # AI Coding 一个月复盘
 
-> 后端工程师 × Claude Code × 4个项目 × 1600+会话 × 645+ commits
-> 2026.3.13 — 2026.4.10
+> 后端开发 × Claude Code × 4个项目 × 1600+会话 × 645+ commits
 
-一个后端研发用一个月时间密集使用 [Claude Code](https://github.com/anthropics/claude-code) 做独立项目，从"推荐我一些好用的工具"到设计控制论Agent编排框架，最后决定转产品。这个系列记录的是认知变化的完整过程——包括后来发现走错了的部分。
+一个后端研发用一个月时间密集使用 [Claude Code](https://github.com/anthropics/claude-code) 做独立项目，从"推荐我一些好用的工具"到设计控制论Agent编排框架。
+这个系列记录的是认知变化的完整过程 —— 包括后来发现走错了的部分。
 
 ---
 
