@@ -1,6 +1,7 @@
 # AI Coding 反思复盘
 
-> 后端开发 × Claude Code × 4个项目 × 1600+会话 × 645+ commits
+> 后端工程师 × Claude Code × 4个项目 × 1700+会话 × 726+ commits
+> 2026.3.13 — 2026.4.12
 
 一个后端研发用一个月时间密集使用 [Claude Code](https://github.com/anthropics/claude-code) 做独立项目，从"推荐我一些好用的工具"到设计控制论Agent编排框架。
 这个系列记录的是认知变化的完整过程 —— 包括后来发现走错了的部分。
@@ -42,6 +43,8 @@
 | 27 | Roadmap本身会编码优先级错误——核心功能如果不在Phase 1出现，说明规划时就没把核心放在核心位置 | Blog 8-3 |
 | 28 | Phase膨胀是scope creep的结构化表现——AI会把每个想法做得很完整，让膨胀看起来像进展 | Blog 8-3 |
 | 29 | 理念偏离在早期最容易修复，一旦"先做完再fix"，后面每一步都在加固错误方向 | Blog 8-3 |
+| 30 | **用独立会话做review——让另一个agent审查主会话的产出，是对抗自动化偏差的低成本实践** | Blog 9 |
+| 31 | 核心先行不是口号，是可验证的：如果两天就能搭完核心，说明之前在非核心的事情上花的时间都是方向债 | Blog 9 |
 
 如果只留一条：**#16 "需求→功能"的转换才是最大杠杆点。**
 
@@ -84,6 +87,10 @@
 
 用Claude Code原生原语重新实现ECL pipeline——这次先做核心
 
+| 阶段 | 关键事件 |
+|------|----------|
+| Blog 9（4/10-12） | 81次提交、9个Plan、114测试通过、双会话review实践 |
+
 ---
 
 ## 文档目录
@@ -101,7 +108,7 @@
 | [03-detent-blog8-1.md](03-detent-blog8-1.md) | Detent Phase 1-5、对抗性规划 |
 | [03-detent-blog8-2.md](03-detent-blog8-2.md) | WebUI翻车、控制论重构、NPX打包 |
 | [03-detent-blog8-3.md](03-detent-blog8-3.md) | Detent弃置、Roadmap优先级偏离 |
-| [09-尾声.md](09-尾声.md) | 为什么从研发转产品 |
+| [04-bonfire-blog9.md](04-bonfire-blog9.md) | bonfire搭建、双会话review、核心先行验证 |
 
 ---
 
