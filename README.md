@@ -1,9 +1,6 @@
 # AI Coding 反思复盘
 
 > 后端工程师 × Claude Code × 4个项目 × 1700+会话 × 726+ commits
-> 2026.3.13 — 2026.4.12
-
-一个后端研发用一个月时间密集使用 [Claude Code](https://github.com/anthropics/claude-code) 做独立项目，从"推荐我一些好用的工具"到设计控制论Agent编排框架。
 这个系列记录的是认知变化的完整过程 —— 包括后来发现走错了的部分。
 
 ---
@@ -52,7 +49,7 @@
 
 ## 项目进展
 
-### mosaicat（3/13 — 3/30）
+### mosaicat（2/13 — 3/30）
 
 一句话需求 → 13个Agent → 交付可运行Web应用
 
